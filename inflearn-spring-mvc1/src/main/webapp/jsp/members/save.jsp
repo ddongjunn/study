@@ -1,5 +1,5 @@
-<%@ page import="hello.servlet.domain.member.Member" %>
-<%@ page import="hello.servlet.domain.member.MemberRepository" %>
+<%@ page import="hello.servlet.web.domain.member.Member" %>
+<%@ page import="hello.servlet.web.domain.member.MemberRepository" %>
 <%
     //request, response 사용 가능
     //내부적으로 자동으로 servlet으로 변환된다.
