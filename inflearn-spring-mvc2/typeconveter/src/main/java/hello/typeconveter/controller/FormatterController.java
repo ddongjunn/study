@@ -28,7 +28,6 @@ public class FormatterController {
         return "formatter-view";
     }
 
-
     @Data
     static class Form{
         @NumberFormat(pattern = "###,###")
