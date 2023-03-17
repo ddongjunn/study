@@ -1,5 +1,6 @@
 package jpabook.jpashop.repository;
 
+import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderSearch;
 import lombok.RequiredArgsConstructor;
@@ -77,7 +78,6 @@ public class OrderRepository {
         Join<Object, Object> m = o.join("member", JoinType.INNER);
 
         List<Predicate> criteria = new ArrayList<>();
-
         //주문 상태 검색
         if(orderSearch.getOrderStatus() != null){
             Predicate status = cb.equal(o.get("status"), orderSearch.getOrderStatus());
@@ -88,7 +88,7 @@ public class OrderRepository {
             Predicate name = cb.like(m.<String>get("name"), "%" + orderSearch.getMemberName() + "%");
             criteria.add(name);
         }
-
+        
         cq.where(cb.and(criteria.toArray(new Predicate[criteria.size()])));
         TypedQuery<Order> query = em.createQuery(cq).setMaxResults(1000);
         return query.getResultList();
