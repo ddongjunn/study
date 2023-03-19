@@ -1,22 +1,32 @@
 package com.djlee.jwt.config.auth;
 
 import com.djlee.jwt.model.User;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
-public class PrincipalDetail implements UserDetails {
+@Getter
+@Setter
+public class PrincipalDetails implements UserDetails {
 
     private User user;
 
-    public PrincipalDetail(User user) {
+    public PrincipalDetails(User user) {
         this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        user.getRoleList().forEach(r -> {
+            authorities.add(() -> r);
+        });
+        return authorities;
     }
 
     @Override
